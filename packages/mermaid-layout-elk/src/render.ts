@@ -722,6 +722,11 @@ export const render = async (
       'elk.layered.mergeEdges': data4Layout.config.elk?.mergeEdges,
       'elk.layered.edgeRouting': data4Layout.config.elk?.edgeRouting,
       'elk.aspectRatio': data4Layout.config.elk?.aspectRatio,
+      // Enable wrapping when aspectRatio is set so ELK reshapes the layout
+      // to approximate the target ratio for connected graphs
+      'elk.layered.wrapping.strategy': data4Layout.config.elk?.aspectRatio
+        ? 'MULTI_EDGE'
+        : undefined,
       'elk.direction': 'DOWN',
       'spacing.baseValue': 40,
       'elk.layered.crossingMinimization.forceNodeModelOrder':
