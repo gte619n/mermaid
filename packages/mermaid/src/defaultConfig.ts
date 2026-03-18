@@ -27,6 +27,7 @@ const config: RequiredDeep<MermaidConfig> = {
     forceNodeModelOrder: false,
     considerModelOrder: 'NODES_AND_EDGES',
     edgeRouting: undefined,
+    aspectRatio: undefined,
   },
   themeCSS: undefined,
 

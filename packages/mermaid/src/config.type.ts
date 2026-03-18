@@ -127,6 +127,13 @@ export interface MermaidConfig {
      *
      */
     edgeRouting?: 'ORTHOGONAL' | 'POLYLINE' | 'SPLINES';
+    /**
+     * Target aspect ratio for the ELK layout engine. When set, ELK's bin-packing
+     * algorithm optimizes horizontal/vertical spacing to approximate this ratio.
+     * For example, 1.77 targets a 16:9 layout suitable for presentations.
+     *
+     */
+    aspectRatio?: number;
   };
   darkMode?: boolean;
   /**

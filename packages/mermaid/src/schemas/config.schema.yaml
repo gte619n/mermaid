@@ -160,6 +160,12 @@ properties:
           - ORTHOGONAL
           - POLYLINE
           - SPLINES
+      aspectRatio:
+        description: |
+          Target aspect ratio for the ELK layout engine. When set, ELK's bin-packing
+          algorithm optimizes horizontal/vertical spacing to approximate this ratio.
+          For example, 1.77 targets a 16:9 layout suitable for presentations.
+        type: number
   darkMode:
     type: boolean
     default: false

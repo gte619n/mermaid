@@ -721,6 +721,7 @@ export const render = async (
       'nodePlacement.strategy': data4Layout.config.elk?.nodePlacementStrategy,
       'elk.layered.mergeEdges': data4Layout.config.elk?.mergeEdges,
       'elk.layered.edgeRouting': data4Layout.config.elk?.edgeRouting,
+      'elk.aspectRatio': data4Layout.config.elk?.aspectRatio,
       'elk.direction': 'DOWN',
       'spacing.baseValue': 40,
       'elk.layered.crossingMinimization.forceNodeModelOrder':
@@ -870,6 +871,7 @@ export const render = async (
   });
 
   let g;
+  log.debug('ELK layout options:', JSON.stringify(elkGraph.layoutOptions));
   try {
     g = await elk.layout(elkGraph);
     log.debug('APA01 after - success');
