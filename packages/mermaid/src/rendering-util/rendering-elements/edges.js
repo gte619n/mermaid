@@ -612,7 +612,7 @@ export const insertEdge = function (
   const edgeCurveType = resolveEdgeCurveType(edge.curve);
   // Apply fixCorners for non-rounded curves to pre-round right-angle corners
   // (rounded curve type uses generateRoundedPath instead)
-  if (edgeCurveType !== 'rounded') {
+  if (edgeCurveType !== 'rounded' && edgeCurveType !== 'orthogonal') {
     lineData = fixCorners(lineData);
   }
   let curve = curveLinear;
@@ -691,10 +691,19 @@ export const insertEdge = function (
       strokeClasses += ' edge-pattern-solid';
   }
   let svgPath;
-  let linePath =
-    edgeCurveType === 'rounded'
-      ? generateRoundedPath(applyMarkerOffsetsToPoints(lineData, edge), 5)
-      : lineFunction(lineData);
+  let linePath;
+  if (edgeCurveType === 'orthogonal') {
+    // Strict orthogonal: straight-line segments through ELK's exact 90-degree bend points
+    const orthogonalLine = line()
+      .x((d) => d.x)
+      .y((d) => d.y)
+      .curve(curveLinear);
+    linePath = orthogonalLine(applyMarkerOffsetsToPoints(lineData, edge));
+  } else if (edgeCurveType === 'rounded') {
+    linePath = generateRoundedPath(applyMarkerOffsetsToPoints(lineData, edge), 5);
+  } else {
+    linePath = lineFunction(lineData);
+  }
   const edgeStyles = Array.isArray(edge.style) ? edge.style : [edge.style];
   let strokeColor = edgeStyles.find((style) => style?.startsWith('stroke:'));
 

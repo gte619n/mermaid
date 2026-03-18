@@ -119,6 +119,14 @@ export interface MermaidConfig {
      *
      */
     considerModelOrder?: 'NONE' | 'NODES_AND_EDGES' | 'PREFER_EDGES' | 'PREFER_NODES';
+    /**
+     * Controls how edges are routed by the ELK layout engine.
+     * ORTHOGONAL produces 90-degree corners with straight segments.
+     * POLYLINE uses straight-line segments (default ELK behavior).
+     * SPLINES produces smooth curved edges.
+     *
+     */
+    edgeRouting?: 'ORTHOGONAL' | 'POLYLINE' | 'SPLINES';
   };
   darkMode?: boolean;
   /**

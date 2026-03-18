@@ -149,6 +149,17 @@ properties:
           - PREFER_EDGES
           - PREFER_NODES
         default: 'NODES_AND_EDGES'
+      edgeRouting:
+        description: |
+          Controls how edges are routed by the ELK layout engine.
+          ORTHOGONAL produces 90-degree corners with straight segments.
+          POLYLINE uses straight-line segments (default ELK behavior).
+          SPLINES produces smooth curved edges.
+        type: string
+        enum:
+          - ORTHOGONAL
+          - POLYLINE
+          - SPLINES
   darkMode:
     type: boolean
     default: false

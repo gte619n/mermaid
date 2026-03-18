@@ -26,6 +26,7 @@ const config: RequiredDeep<MermaidConfig> = {
     nodePlacementStrategy: 'BRANDES_KOEPF',
     forceNodeModelOrder: false,
     considerModelOrder: 'NODES_AND_EDGES',
+    edgeRouting: undefined,
   },
   themeCSS: undefined,
 

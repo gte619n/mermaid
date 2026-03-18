@@ -720,6 +720,7 @@ export const render = async (
       'elk.algorithm': algorithm,
       'nodePlacement.strategy': data4Layout.config.elk?.nodePlacementStrategy,
       'elk.layered.mergeEdges': data4Layout.config.elk?.mergeEdges,
+      'elk.layered.edgeRouting': data4Layout.config.elk?.edgeRouting,
       'elk.direction': 'DOWN',
       'spacing.baseValue': 40,
       'elk.layered.crossingMinimization.forceNodeModelOrder':
@@ -1070,9 +1071,14 @@ export const render = async (
           });
         }
         edge.points = deduped;
-        // ELK produces orthogonal edge routes — override the curve to 'rounded' (right-angle
-        // segments with rounded corners) so basis/smooth interpolation doesn't distort them.
-        edge.curve = 'rounded';
+        // Set curve type based on ELK edgeRouting configuration
+        if (data4Layout.config.elk?.edgeRouting === 'ORTHOGONAL') {
+          // Strict orthogonal: straight lines through ELK's calculated 90-degree bend points
+          edge.curve = 'orthogonal';
+        } else {
+          // Default: rounded right-angle segments with rounded corners
+          edge.curve = 'rounded';
+        }
         const paths = insertEdge(
           edgesEl,
           edge,
